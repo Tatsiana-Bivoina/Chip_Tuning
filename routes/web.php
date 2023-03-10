@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,6 +14,34 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Route::group(['namespace' => 'Home'], function () {
+    Route::get('/', 'IndexController')->name('home.index');
 });
+
+Route::group(['namespace' => 'VehicleList'], function () {
+    Route::get('/page/vehicle-list', 'IndexController')->name('vehicleList.index');
+});
+
+Route::group(['namespace' => 'ChiptuningService'], function () {
+    Route::get('/page/chiptuning-services', 'IndexController')->name('chiptuningService.index');
+});
+
+Route::group(['namespace' => 'Pricing'], function () {
+    Route::get('/page/pricing', 'IndexController')->name('pricing.index');
+});
+
+Route::group(['namespace' => 'Contact'], function () {
+    Route::get('/page/contact-us', 'IndexController')->name('contacts.index');
+});
+
+Route::get('/member-area', function () {
+    return view('member_area');
+})->middleware(['auth', 'verified'])->name('member_area');
+
+Route::middleware('auth')->group(function () {
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+});
+
+require __DIR__.'/auth.php';
