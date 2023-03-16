@@ -1,4 +1,4 @@
-<div class="sm:absolute sm:top-0 sm:right-0 sm:left-0 min-h-[80px] z-[99] hidden sm:block">
+<div class="sm:absolute sm:top-0 sm:right-0 sm:left-0 min-h-[80px] z-[99] hidden sm:block" x-bind:style="currentPage !== '/' && { backgroundColor: '#222' }">
     <nav class="px-6 relative flex justify-between items-center min-h-[inherit]">
         @if (Route::has('login'))
             <div>

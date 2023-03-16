@@ -1,4 +1,5 @@
 <div
+    x-cloak
     x-show="show"
     x-transition:enter="transition linear duration-[0.7s]"
     x-transition:enter-start="opacity-0 scale-90"

@@ -1,9 +1,10 @@
-<header x-data="{ show: false }" class="relative flex flex-col bg-black/[.7]">
+<header  x-cloak x-data="{ show: false, currentPage: '{{$url}}' }" class="relative flex flex-col bg-black/[.7]">
     @include('layouts.navigation-top')
 
     <div
         @scroll.window="atTop = (window.pageYOffset < 80) ? false : true"
         class="right-0 left-0 min-h-[80px] z-[99]"
+        x-bind:style="currentPage !== '/' && { backgroundColor: '#222' }"
         :class="atTop ? 'fixed top-0 bg-[#222]' : 'absolute top-0 sm:top-[50px]'"
     >
         <nav class="px-6 relative flex justify-between items-center min-h-[inherit]">

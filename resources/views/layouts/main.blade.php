@@ -1,3 +1,10 @@
+@php
+    $carBrands = ['Alfa Romeo', 'Alfa', 'Alfa Romeo', 'Alfa Romeo', 'Alfa Romeo', 'Alfa Romeo', 'Alfa Romeo', 'Alfa Romeo', 'Alfa Romeo', 'Alfa Romeo', 'Romeo', 'Alfa Romeo', 'Alfa Romeo', 'Alfa', 'Alfa Romeo', 'Alfa Romeo', 'Alfa Romeo', 'Alfa Romeo', 'Alfa Romeo', 'Alfa Romeo', ];
+    $days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+    $workingHours = ['From 09:00 to 20:00', 'From 09:00 to 20:00', 'From 09:00 to 20:00', 'From 09:00 to 20:00', 'From 09:00 to 20:00', 'From 09:00 to 16:00', 'Closed'];
+    $url = $_SERVER['REQUEST_URI'];
+@endphp
+
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
     <head>
@@ -19,11 +26,10 @@
     <body class="antialiased" x-data="{ atTop: false }">
         @include('layouts.header')
 
-        <main class="max-w-7xl mx-auto h-[1000px]">
+        <main class="h-[1000px]">
             @yield('content')
         </main>
-        <footer class="flex justify-center mt-16 px-0 sm:items-center sm:justify-between">
-            FOOTER
-        </footer>
+
+        @include('layouts.footer')
     </body>
 </html>
