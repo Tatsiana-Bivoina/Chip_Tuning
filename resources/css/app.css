@@ -4,6 +4,23 @@
 
 [x-cloak] { display: none !important; }
 
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+input[type="number"] {
+    appearance: none;
+    -moz-appearance: textfield;
+}
+
+input[type="number"]:hover,
+input[type="number"]:focus {
+    appearance: none;
+    -moz-appearance: number-input;
+}
+
 .member-area-icon {
     @apply inline-block w-5 h-5 mr-1 fill-gray-400 focus:outline-none focus:text-white;
 }

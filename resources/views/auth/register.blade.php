@@ -1,5 +1,12 @@
 <x-guest-layout>
-    <div class="w-full p-4 md:w-1/2" x-data="{ show: true }">
+    <div
+        class="w-full p-4 md:w-1/2"
+        @if ($errors->any() && old('private_person') == "on")
+            x-data="{ show: false }"
+        @else
+            x-data="{ show: true }"
+        @endif
+    >
         <div class="w-full p-7 bg-white">
             <div class="mb-5 text-2xl text-gray-600 dark:text-gray-400 leading-[1.4]">
                 <h3>Register</h3>
@@ -9,14 +16,14 @@
                 @csrf
 
                 <fieldset>
-                    <div class="flex flex-col">
+                    <div class="flex flex-col mb-2">
                         <div class="grid grid-cols-1 w-full md:grid-cols-2 gap-4">
                             <div class="inline-block max-w-full">
                                 <x-text-input id="name" class="block mt-1 w-full" type="text" name="name" placeholder="Name*" :value="old('name')" required autofocus autocomplete="name" />
                                 <x-input-error :messages="$errors->get('name')" class="mt-2" />
                             </div>
                             <div class="inline-block max-w-full">
-                                <x-text-input id="surname" class="block mt-1 w-full" type="text" name="surname" placeholder="Surname*" :value="old('Surname')" required autocomplete="surname" />
+                                <x-text-input id="surname" class="block mt-1 w-full" type="text" name="surname" placeholder="Surname*" :value="old('surname')" required autocomplete="surname" />
                                 <x-input-error :messages="$errors->get('surname')" class="mt-2" />
                             </div>
                             <div class="inline-block max-w-full">
@@ -24,12 +31,20 @@
                                 <x-input-error :messages="$errors->get('phone')" class="mt-2" />
                             </div>
                         </div>
-                        <div class="block mt-4">
-                            <label for="private_person" class="inline-flex items-center group hover:cursor-pointer">
-                                <x-input-checkbox @click="show = !show" name="private_person" id="private_person" class="group-hover:border-indigo-300" />
-
-                                <span class="ml-2 text-sm text-gray-600 dark:text-gray-400 select-none">{{ __('I am a private person') }}</span>
+                        <div class="flex flex-row-reverse justify-end items-center mt-4">
+                            <label for="private_person" class="ml-2 text-sm text-gray-600 select-none peer hover:cursor-pointer">
+                                {{ __('I am a private person') }}
                             </label>
+                            <input type="hidden" name="private_person" x-bind:value="show ? 'off' : 'on'" />
+                            <input
+                                type="checkbox"
+                                id="private_person"
+                                name="private_person"
+                                x-bind:value="show ? 'off' : 'on'"
+                                class="w-4 h-4 border border-gray-300 focus:outline-none focus:ring-offset-0 focus:ring-offset-transparent focus:ring-transparent focus:border-2 focus:border-indigo-300 peer-hover:border-indigo-300"
+                                @click="show = !show"
+                                @checked(old('private_person') == 'on')
+                            />
                         </div>
                     </div>
                 </fieldset>
@@ -52,14 +67,22 @@
                 <fieldset>
                     <div class="grid grid-cols-2 gap-y-4 w-full md:grid-cols-4 md:gap-4 mt-4">
                         <div class="inline-block max-w-full col-span-2">
-                            <select name="country" id="country" required class="block mt-1 w-full relative border-[#e5e5e5] focus:border-indigo-100 focus:ring-indigo-300 shadow-sm">
+                            <select
+                                name="country"
+                                id="country"
+                                required
+                                class="block mt-1 w-full relative border-[#e5e5e5] focus:border-indigo-100 focus:ring-indigo-300 shadow-sm"
+                            >
                                 <option disabled selected value=""> {{ __('Country*') }}</option>
                                 @if (count($countries) !== 0)
                                     @foreach ($countries as $country)
-                                        <option value="{{ $country->name }}">{{ $country->name }}</option>
+                                        <option value="{{ $country->name }}" @selected(old('country') == $country->name)>
+                                            {{ $country->name }}
+                                        </option>
                                     @endforeach
                                 @endif
                             </select>
+                            <x-input-error :messages="$errors->get('country')" class="mt-2" />
                         </div>
                         <div class="inline-block max-w-full col-span-2">
                             <x-text-input id="city" class="block mt-1 w-full" type="text" name="city" placeholder="City*" :value="old('city')" required autocomplete="city" />
@@ -70,7 +93,7 @@
                             <x-input-error :messages="$errors->get('address')" class="mt-2" />
                         </div>
                         <div class="inline-block max-w-full col-span-2 md:col-span-1">
-                            <x-text-input id="zip" class="block mt-1 w-full" type="text" name="zip" placeholder="Zip*" :value="old('zip')" autocomplete="zip" />
+                            <x-text-input id="zip" class="block mt-1 w-full" type="number" name="zip" placeholder="Zip*" :value="old('zip')" autocomplete="zip" />
                             <x-input-error :messages="$errors->get('zip')" class="mt-2" />
                         </div>
                     </div>
@@ -83,18 +106,21 @@
                         </div>
                         <div class="inline-block max-w-full">
                             <x-text-input id="password" class="block mt-1 w-full"
-                                    type="password"
-                                    name="password"
-                                    placeholder="Password*"
-                                    required autocomplete="new-password" />
+                                type="password"
+                                name="password"
+                                placeholder="Password*"
+                                required autocomplete="new-password"
+                            />
                             <x-input-error :messages="$errors->get('password')" class="mt-2" />
                         </div>
                         <div class="inline-block max-w-full">
                             <x-text-input id="password_confirmation" class="block mt-1 w-full"
-                            type="password"
-                            placeholder="Password confirmation*"
-                            name="password_confirmation" required autocomplete="new-password" />
-
+                                type="password"
+                                placeholder="Password confirmation*"
+                                name="password_confirmation"
+                                required
+                                autocomplete="new-password"
+                            />
                             <x-input-error :messages="$errors->get('password_confirmation')" class="mt-2" />
                         </div>
                         <div class="relative top-[-10px] inline-block max-w-full">
@@ -103,18 +129,23 @@
                     </div>
                 </fieldset>
                 <fieldset>
-                    <div class="grid grid-cols-1 w-full gap-4 mt-2">
-                        <div class="block">
-                            <label for="agreement" class="inline-flex items-center group hover:cursor-pointer">
-                                <x-input-checkbox name="agreement" id="agreement" class="group-hover:border-indigo-300" />
-                                <span class="ml-2 text-sm text-gray-600 dark:text-gray-400 select-none">
-                                    {{ __('I agree with this site ') }}
-                                    <a class="text-sm text-blue-500 hover:text-blue-900 hover:underline focus:underline focus:outline-none" href="#">
-                                        {{ __('Private Policy') }}
-                                    </a>
-                                </span>
+                    <div class="grid grid-cols-1 w-full gap-2 mt-2">
+                        <div class="flex flex-row-reverse justify-end items-center">
+                            <label for="agreement" class="ml-2 text-sm text-gray-600 select-none peer hover:cursor-pointer">
+                                {{ __('I agree with this site ') }}
+                                <a class="text-sm text-blue-500 hover:text-blue-900 hover:underline focus:underline focus:outline-none" href="#">
+                                    {{ __('Private Policy') }}
+                                </a>
                             </label>
+                            <input
+                                type="checkbox"
+                                id="agreement"
+                                name="agreement"
+                                class="w-4 h-4 border border-gray-300 focus:outline-none focus:ring-offset-0 focus:ring-offset-transparent focus:ring-transparent focus:border-2 focus:border-indigo-300 peer-hover:border-indigo-300"
+                                @checked(old('agreement'))
+                            />
                         </div>
+                        <x-input-error :messages="$errors->get('agreement')" class="mt-2" />
                     </div>
                 </fieldset>
 
