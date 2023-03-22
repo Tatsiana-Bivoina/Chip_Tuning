@@ -3,14 +3,15 @@
 namespace App\Http\Controllers\Home;
 
 use App\Http\Controllers\Controller;
+use App\Models\EcuTuningFile;
 use Illuminate\Http\Request;
 
 class IndexController extends Controller
 {
     public function __invoke(Request $request)
     {
-        $uri = $request->path();
+        $ecuTuningFiles = EcuTuningFile::all();
 
-        return view('home.index');
+        return view('home.index', compact('ecuTuningFiles'));
     }
 }

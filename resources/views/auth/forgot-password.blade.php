@@ -13,7 +13,7 @@
             <!-- Email Address -->
             <div class="relative mt-4">
                 <span class="absolute w-10 h-10 right-0 left-auto bottom-0 top-0 inline-flex justify-center items-center pointer-events-none z-[1]">
-                    <x-user-icon />
+                    <x-icons.user-icon />
                 </span>
                 <x-text-input id="email" class="block mt-1 w-full pr-10" type="email" name="email" placeholder="E-Mail Address" :value="old('email')" required autofocus />
                 <x-input-error :messages="$errors->get('email')" class="mt-2" />
