@@ -34,9 +34,11 @@ Route::group(['namespace' => 'Contact'], function () {
     Route::get('/page/contact-us', 'IndexController')->name('contacts.index');
 });
 
-Route::get('/member-area', function () {
-    return view('member_area');
-})->middleware(['auth', 'verified'])->name('member_area');
+Route::group(['namespace' => 'MemberArea'], function () {
+    Route::get('/member-area', 'IndexController')
+        ->middleware(['auth', 'verified'])
+        ->name('memberArea.index');
+});
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

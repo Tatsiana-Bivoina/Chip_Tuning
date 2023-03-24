@@ -1,5 +1,5 @@
 <x-guest-layout>
-    <div class="w-full sm:max-w-[300px]">
+    <div class="max-w-[300px]">
         <!-- Session Status -->
         <x-auth-session-status class="mb-4" :status="session('status')" />
 

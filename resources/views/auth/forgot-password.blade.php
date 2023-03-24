@@ -1,5 +1,5 @@
 <x-guest-layout>
-    <div class="w-full sm:max-w-[270px] mt-6">
+    <div class="max-w-[270px]">
         <div class="mb-4 text-2xl text-gray-600 dark:text-gray-400 leading-[1.4]">
             <h3>Reset Password</h3>
         </div>

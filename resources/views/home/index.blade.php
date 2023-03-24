@@ -2,7 +2,11 @@
 
 @section('content')
 
-    <section class="relative h-[80vh] min-h-[460px] bg-[url('../images/main-bg.jpg')] bg-no-repeat bg-cover bg-center overflow-hidden before:content-[''] before:absolute before:bg-black/[.5] before:z-[1] before:top-0 before:bottom-0 before:left-0 before:right-0">
+    <section
+        x-data="{ elemPosition: 0, elemPaddingTop: 70, scrollToSection() { window.scrollBy(0,this.elemPosition-this.elemPaddingTop) } }"
+        x-init="elemPosition = document.getElementById('spotlights').getBoundingClientRect().top+window.pageYOffset"
+        class="relative h-[80vh] min-h-[460px] bg-[url('../images/main-bg.jpg')] bg-no-repeat bg-cover bg-center overflow-hidden before:content-[''] before:absolute before:bg-black/[.5] before:z-[1] before:top-0 before:bottom-0 before:left-0 before:right-0"
+    >
         <div class="relative top-[40%] sm:top-[30%] sm:mx-auto max-w-[1200px] px-5 sm:px-10">
             <div class="relative w-full sm:w-1/2 z-10">
                 <h1 class="animate-textAppearenceFirst uppercase text-white text-4xl md:text-[2.6rem] leading-[1.2] font-sans font-bold mb-5">online ecu file service</h1>
@@ -15,7 +19,7 @@
             </div>
         </div>
         <div class="absolute bottom-[5%] left-1/2 translate-x-[-50%] translate-y-[-5%] z-10">
-            <a href="#spotlights"><x-icons.arrow-down-icon></x-icons.arrow-down-icon></a>
+            <button @click="scrollToSection"><x-icons.arrow-down-icon></x-icons.arrow-down-icon></button>
         </div>
     </section>
     <section class="relative bg-[url('../images/module-bg.png')] bg-[50% 0] bg-no-repeat bg-contain py-10 sm:py-[70px]">
@@ -45,13 +49,6 @@
                                     class="relative block h-10 w-full mt-5 md:mt-0 bg-white disabled:bg-[#f8f8f8] text-[#666] px-3 border-[#e5e5e5] focus:border-indigo-100 focus:ring-indigo-300 shadow-sm"
                                 >
                                     <option disabled selected value=""> {{ __('Select') }}</option>
-                                    {{-- @if (count($countries) !== 0)
-                                        @foreach ($countries as $country)
-                                            <option value="{{ $country->name }}" @selected(old('country') == $country->name)>
-                                                {{ $country->name }}
-                                            </option>
-                                        @endforeach
-                                    @endif --}}
                                 </select>
                             </div>
                             <div class="w-full">
@@ -63,13 +60,6 @@
                                     class="relative block h-10 w-full mt-5 md:mt-0 bg-white disabled:bg-[#f8f8f8] text-[#666] px-3 border-[#e5e5e5] focus:border-indigo-100 focus:ring-indigo-300 shadow-sm"
                                 >
                                     <option disabled selected value=""> {{ __('Select') }}</option>
-                                    {{-- @if (count($countries) !== 0)
-                                        @foreach ($countries as $country)
-                                            <option value="{{ $country->name }}" @selected(old('country') == $country->name)>
-                                                {{ $country->name }}
-                                            </option>
-                                        @endforeach
-                                    @endif --}}
                                 </select>
                             </div>
                         </div>
