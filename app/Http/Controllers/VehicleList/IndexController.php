@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers\VehicleList;
 
-use App\Http\Controllers\Controller;
-
-class IndexController extends Controller
+class IndexController extends BaseController
 {
     public function __invoke()
     {
-        return view('vehicleList.index');
+        $carBrands = $this->carBrandService->index()->allCarBrands;
+        $randomCarBrands = $this->carBrandService->index()->randomCarBrands;
+
+        return view('vehicleList.index', compact('randomCarBrands'));
     }
 }

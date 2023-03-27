@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers\Pricing;
 
-use App\Http\Controllers\Controller;
-
-class IndexController extends Controller
+class IndexController extends BaseController
 {
     public function __invoke()
     {
-        return view('pricing.index');
+        $randomCarBrands = $this->carBrandService->index()->randomCarBrands;
+
+        return view('pricing.index', compact('randomCarBrands'));
     }
 }

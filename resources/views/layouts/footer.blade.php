@@ -1,6 +1,6 @@
 <footer class="bg-[#222] pt-[70px] w-full">
     <div class="sm:container sm:mx-auto xl:max-w-7xl px-4 sm:px-0 grid sm:grid-cols-2 lg:grid-cols-4">
-        <div>
+        <div class="pr-3 sm:mb-5">
             <x-footer-title>Site navigation</x-footer-title>
             <ul class="grid gap-2.5">
                 <li>
@@ -30,7 +30,7 @@
                 </li>
             </ul>
         </div>
-        <div>
+        <div class="pr-3 sm:mb-5">
             <x-footer-title>Site information</x-footer-title>
             <ul class="grid gap-2.5">
                 <li>
@@ -50,19 +50,19 @@
                 </li>
             </ul>
         </div>
-        <div>
+        <div class="pr-3 sm:mb-5">
             <x-footer-title>We serve car brands</x-footer-title>
             <ul class="flex flex-wrap gap-2.5">
-                @foreach ($carBrands as $carBrand)
+                @foreach ($randomCarBrands as $carBrand)
                     <li>
                         <a href="" class="inline-block text-[#666] bg-white rounded-sm text-sm leading-6 px-2 uppercase whitespace-nowrap hover:text-gray-400 focus:outline-dotted focus:outline-white focus:outline-2">
-                            {{ $carBrand }}
+                            {{ $carBrand['brand_name'] }}
                         </a>
                     </li>
                 @endforeach
             </ul>
         </div>
-        <div>
+        <div class="pr-3 sm:mb-5">
             <x-footer-title>Our working hours</x-footer-title>
             <div class="flex">
                 <div class="mr-4">

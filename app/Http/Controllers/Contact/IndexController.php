@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers\Contact;
 
-use App\Http\Controllers\Controller;
-
-class IndexController extends Controller
+class IndexController extends BaseController
 {
     public function __invoke()
     {
-        return view('contact.index');
+        $randomCarBrands = $this->carBrandService->index()->randomCarBrands;
+
+        return view('contact.index', compact('randomCarBrands'));
     }
 }

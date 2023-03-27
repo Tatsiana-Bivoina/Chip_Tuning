@@ -2,16 +2,15 @@
 
 namespace App\Http\Controllers\Home;
 
-use App\Http\Controllers\Controller;
-use App\Models\EcuTuningFile;
 use Illuminate\Http\Request;
 
-class IndexController extends Controller
+class IndexController extends BaseController
 {
     public function __invoke(Request $request)
     {
-        $ecuTuningFiles = EcuTuningFile::all();
+        $ecuTuningFiles = $this->service->index()->ecuTuningFiles;
+        $randomCarBrands = $this->service->index()->randomCarBrands;
 
-        return view('home.index', compact('ecuTuningFiles'));
+        return view('home.index', compact('ecuTuningFiles', 'randomCarBrands'));
     }
 }
