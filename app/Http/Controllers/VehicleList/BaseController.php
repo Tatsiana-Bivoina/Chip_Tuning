@@ -3,14 +3,14 @@
 namespace App\Http\Controllers\VehicleList;
 
 use App\Http\Controllers\Controller;
-use App\Services\CarBrand\Service;
+use App\Services\VehicleList\Service;
 
 class BaseController extends Controller
 {
-    public $carBrandService;
+    public $vehicleListService;
 
     public function __construct(Service $service)
     {
-        $this->carBrandService = $service;
+        $this->vehicleListService = $service;
     }
 }

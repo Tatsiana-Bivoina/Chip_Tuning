@@ -1,8 +1,6 @@
 @php
-    $carBrands = ['Alfa Romeo', 'Alfa', 'Alfa Romeo', 'Alfa Romeo', 'Alfa Romeo', 'Alfa Romeo', 'Alfa Romeo', 'Alfa Romeo', 'Alfa Romeo', 'Alfa Romeo', 'Romeo', 'Alfa Romeo', 'Alfa Romeo', 'Alfa', 'Alfa Romeo', 'Alfa Romeo', 'Alfa Romeo', 'Alfa Romeo', 'Alfa Romeo', 'Alfa Romeo', ];
     $days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
     $workingHours = ['From 09:00 to 20:00', 'From 09:00 to 20:00', 'From 09:00 to 20:00', 'From 09:00 to 20:00', 'From 09:00 to 20:00', 'From 09:00 to 16:00', 'Closed'];
-    $url = $_SERVER['REQUEST_URI'];
 @endphp
 
 <!DOCTYPE html>

@@ -10,7 +10,8 @@ class IndexController extends BaseController
     {
         $ecuTuningFiles = $this->service->index()->ecuTuningFiles;
         $randomCarBrands = $this->service->index()->randomCarBrands;
+        $url = $this->service->index()->url;
 
-        return view('home.index', compact('ecuTuningFiles', 'randomCarBrands'));
+        return view('home.index', compact('ecuTuningFiles', 'randomCarBrands', 'url'));
     }
 }

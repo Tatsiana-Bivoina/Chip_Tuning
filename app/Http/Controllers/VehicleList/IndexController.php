@@ -6,9 +6,10 @@ class IndexController extends BaseController
 {
     public function __invoke()
     {
-        $carBrands = $this->carBrandService->index()->allCarBrands;
-        $randomCarBrands = $this->carBrandService->index()->randomCarBrands;
+        $carBrands = $this->vehicleListService->index()->allCarBrands;
+        $randomCarBrands = $this->vehicleListService->index()->randomCarBrands;
+        $url = $this->vehicleListService->index()->url;
 
-        return view('vehicleList.index', compact('randomCarBrands'));
+        return view('vehicleList.index', compact('randomCarBrands', 'carBrands', 'url'));
     }
 }
