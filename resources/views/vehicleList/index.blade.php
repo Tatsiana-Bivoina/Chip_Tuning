@@ -7,9 +7,10 @@
             <div class="mt-3">
                 <ul class="flex items-center">
                     <li>
-                        <x-breadcrumb-nav-link :href="route('home.index')" class="after:content-['/'] after:inline-block after:mx-[16px] after:text-[#999]">
+                        <x-breadcrumb-nav-link :href="route('home.index')">
                             {{ __('Home') }}
                         </x-breadcrumb-nav-link>
+                        <span class="text-[#999] mx-[16px]">/</span>
                     </li>
                     <li class="text-[#999] last:text-[#666] text-sm">
                         <span>{{ __('Vehicle List') }}</span>
@@ -23,7 +24,7 @@
                         <div class="relative flex items-center justify-center shadow-[0_5px_15px_rgba(0,0,0,.08)] h-[60px] hover:cursor-pointer hover:shadow-[0_14px_25px_rgba(0,0,0,.16)] group transition-shadow !ease-out !duration-700">
                             <button class="flex items-center justify-center group-hover:opacity-20 transition-opacity !ease-out !duration-700">
                                 <div class="w-5 h-auto mr-2">
-                                    <img src="{{ $elem['brand_logo'] }}" alt="Logo" class="grayscale object-contain">
+                                    <img src="{{ Vite::asset($elem['brand_logo']) }}" alt="Logo" class="grayscale object-contain">
                                 </div>
                                 {{ $elem['brand_name'] }}
                             </button>

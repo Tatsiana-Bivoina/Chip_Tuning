@@ -9,5 +9,10 @@ class VehicleBrand extends Model
 {
     use HasFactory;
     protected $guarded = [];
-    protected $table = 'vehicle__brands';
+    protected $table = 'vehicle_brands';
+
+    public function vehicleModel()
+    {
+        return $this->hasMany(VehicleModel::class);
+    }
 }

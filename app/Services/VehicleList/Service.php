@@ -10,6 +10,16 @@ class Service extends Controller
     public function index()
     {
         $carBrands = VehicleBrand::all()->toArray();
+        if (count($carBrands) !== 0) {
+            usort($carBrands, function ($a, $b) {
+                if ($a['brand_name'] == $b['brand_name']) {
+                    return 0;
+                }
+
+                return ($a['brand_name'] < $b['brand_name']) ? -1 : 1;
+            });
+        }
+
         $rand_keys = array_rand($carBrands, 20);
         $randomCarBrands = [];
 
@@ -21,20 +31,53 @@ class Service extends Controller
                 }
             }
         }
+        if (count($randomCarBrands) !== 0) {
+            usort($randomCarBrands, function ($a, $b) {
+                if ($a['brand_name'] == $b['brand_name']) {
+                    return 0;
+                }
 
+                return ($a['brand_name'] < $b['brand_name']) ? -1 : 1;
+            });
+        }
+
+        $url = $_SERVER['REQUEST_URI'];
+
+        return (object) [
+            'allCarBrands' => $carBrands,
+            'randomCarBrands' => $randomCarBrands,
+            'url' => $url,
+        ];
+    }
+
+    public function show()
+    {
         $url = $_SERVER['REQUEST_URI'];
         $urlArr = explode('/', $url);
         $currentPage = array_pop($urlArr);
 
         if (str_contains($currentPage, '-')) {
             $currentPage = ucwords(str_replace('-', ' ', $currentPage));
+        } else {
+            $currentPage = ucfirst($currentPage);
+        }
+
+        $carBrand = VehicleBrand::where('brand_name', $currentPage)->first();
+        $carModels = $carBrand->vehicleModel->toArray();
+        if (count($carModels) !== 0) {
+            usort($carModels, function ($a, $b) {
+                if ($a['model_name'] == $b['model_name']) {
+                    return 0;
+                }
+
+                return ($a['model_name'] < $b['model_name']) ? -1 : 1;
+            });
         }
 
         return (object) [
-            'allCarBrands' => $carBrands,
-            'randomCarBrands' => $randomCarBrands,
+            'carBrand' => $carBrand,
+            'carModels' => $carBrand->vehicleModel,
             'currentPage' => $currentPage,
-            'url' => $url,
         ];
     }
 }

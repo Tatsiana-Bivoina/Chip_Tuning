@@ -20,6 +20,7 @@ Route::group(['namespace' => 'Home'], function () {
 
 Route::group(['namespace' => 'VehicleList'], function () {
     Route::get('/page/vehicle-list', 'IndexController')->name('vehicleList.index');
+    Route::get('/page/vehicle-list/{brand}', 'ShowController')->name('vehicleList.show');
 });
 
 Route::group(['namespace' => 'ChiptuningService'], function () {
