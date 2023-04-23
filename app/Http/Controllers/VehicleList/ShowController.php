@@ -8,10 +8,9 @@ class ShowController extends BaseController
     {
         $randomCarBrands = $this->vehicleListService->index()->randomCarBrands;
         $url = $this->vehicleListService->index()->url;
-        $currentPage = $this->vehicleListService->show()->currentPage;
         $carModels = $this->vehicleListService->show()->carModels;
         $carBrand = $this->vehicleListService->show()->carBrand;
 
-        return view('vehicleList.show', compact('randomCarBrands', 'currentPage', 'url', 'carBrand', 'carModels'));
+        return view('vehicleList.show', compact('randomCarBrands', 'url', 'carBrand', 'carModels'));
     }
 }

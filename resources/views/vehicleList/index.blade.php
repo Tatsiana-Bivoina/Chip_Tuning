@@ -29,7 +29,7 @@
                                 {{ $elem['brand_name'] }}
                             </button>
                             <a
-                                href={{ route('vehicleList.show', ['brand' => str_contains($elem['brand_name'], ' ') ? strtolower(str_replace(' ', '-', $elem['brand_name'])) : strtolower($elem['brand_name'])]) }}
+                                href={{ route('vehicleList.show', ['brand' => $elem['brand_route']]) }}
                                 class="absolute opacity-0 group-hover:opacity-100 text-white bg-[#f0506e] rounded-full px-4 text-sm !leading-[28px] transition-opacity !ease-out !duration-700"
                             >
                                 Open

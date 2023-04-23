@@ -8,7 +8,9 @@
                     <img src="{{ Vite::asset($carBrand->brand_logo) }}" alt="brand logo">
                 </div>
                 <h1 class="text-[2.23rem] md:text-[2.625rem] leading-[1.2] text-[#333] font-sans font-normal">
-                    {{ $carBrand->brand_name }}
+                    {{ $carBrand->brand_name }}&nbsp;
+                    {{ $carModel->model_name }}&nbsp;
+                    {{ $carModel->release_years }}
                 </h1>
             </div>
             <div class="mt-3">
@@ -25,28 +27,38 @@
                         </x-breadcrumb-nav-link>
                         <span class="text-[#999] mx-[16px]">/</span>
                     </li>
+                    <li>
+                        <x-breadcrumb-nav-link :href="route('vehicleList.show', ['brand' =>  $carBrand->brand_route])">
+                            {{ $carBrand->brand_name }}
+                        </x-breadcrumb-nav-link>
+                        <span class="text-[#999] mx-[16px]">/</span>
+                    </li>
                     <li class="text-[#999] last:text-[#666] text-sm">
-                        <span>{{ $carBrand->brand_name }}</span>
+                        <span>
+                            {{ $carModel->model_name }}&nbsp;
+                            {{ $carModel->release_years }}
+                        </span>
                     </li>
                 </ul>
             </div>
             <div class="mt-8">
                 <ul>
-                    @if (count($carModels) === 0)
+                    @if (count($carEngine) === 0)
                         <li class="text-center text-[#666] font-sans m-10 lg:m-16">No data</li>
                     @else
-                        @foreach ($carModels as $elem)
+                        @foreach ($carEngine as $elem)
                             <li class="mb-3">
                                 <a
-                                href={{ route('vehicleList.model.show', [
-                                    'brand' => $carBrand->brand_route,
-                                    'model' => $elem->model_route,
-                                    ]) }}
+                                    href=""
                                     class="text-[#666] font-sans font-normal text-base hover:text-[#999] hover:underline focus:outline-dotted focus:outline-[#999] focus:outline-2 transition duration-150 ease-in-out"
                                 >
-                                    {{ $elem->model_name }}&nbsp;
-                                    {{ $elem->release_years }}
-                                    <span> -> ...</span>
+                                    {{ $elem->engine_capacity }}&nbsp;
+                                    @if ($elem->engine_classification !== "")
+                                        {{ $elem->engine_classification }}&nbsp;
+                                    @endif
+                                    {{ $elem->engine_power }}
+                                    /
+                                    {{ $elem->torque }}
                                 </a>
                             </li>
                         @endforeach

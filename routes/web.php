@@ -23,6 +23,10 @@ Route::group(['namespace' => 'VehicleList'], function () {
     Route::get('/page/vehicle-list/{brand}', 'ShowController')->name('vehicleList.show');
 });
 
+Route::group(['namespace' => 'VehicleList\Models'], function () {
+    Route::get('/page/vehicle-list/{brand}/{model}', 'ShowController')->name('vehicleList.model.show');
+});
+
 Route::group(['namespace' => 'ChiptuningService'], function () {
     Route::get('/page/chiptuning-services', 'IndexController')->name('chiptuningService.index');
 });

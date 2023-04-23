@@ -16,4 +16,9 @@ class VehicleModel extends Model
     {
         return $this->belongsTo(VehicleBrand::class);
     }
+
+    public function vehicleEngine()
+    {
+        return $this->hasMany(VehicleEngine::class);
+    }
 }

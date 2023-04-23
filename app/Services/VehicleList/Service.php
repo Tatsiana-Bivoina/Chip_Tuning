@@ -4,6 +4,7 @@ namespace App\Services\VehicleList;
 
 use App\Http\Controllers\Controller;
 use App\Models\VehicleBrand;
+use App\Models\VehicleModel;
 
 class Service extends Controller
 {
@@ -56,13 +57,8 @@ class Service extends Controller
         $urlArr = explode('/', $url);
         $currentPage = array_pop($urlArr);
 
-        if (str_contains($currentPage, '-')) {
-            $currentPage = ucwords(str_replace('-', ' ', $currentPage));
-        } else {
-            $currentPage = ucfirst($currentPage);
-        }
+        $carBrand = VehicleBrand::where('brand_route', $currentPage)->first();
 
-        $carBrand = VehicleBrand::where('brand_name', $currentPage)->first();
         $carModels = $carBrand->vehicleModel->toArray();
         if (count($carModels) !== 0) {
             usort($carModels, function ($a, $b) {
@@ -77,7 +73,22 @@ class Service extends Controller
         return (object) [
             'carBrand' => $carBrand,
             'carModels' => $carBrand->vehicleModel,
-            'currentPage' => $currentPage,
+        ];
+    }
+
+    public function modelShow()
+    {
+        $url = $_SERVER['REQUEST_URI'];
+        $urlArr = explode('/', $url);
+
+        $currentPage = array_pop($urlArr);
+
+        $carModel = VehicleModel::where('model_route', $currentPage)->first();
+
+        return (object) [
+            'carModel' => $carModel,
+            'carBrand' => $carModel->vehicleBrand,
+            'carEngine' => $carModel->vehicleEngine,
         ];
     }
 }
